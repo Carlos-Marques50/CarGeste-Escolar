@@ -16,18 +16,17 @@ use App\Http\Controllers\LicencaController;
 |
 */
 
-
-//Esta rota apresenta a pagina pricipal do sistema. 
-Route::get("/",function(){
-    return view("welcome");
-})->name("welcome");
-
 //Esta rota leva-nos até ao controller de auth
 Route::get("login",[AuthController::class,"showLoginForm"])->name("login");
 
-//Esta rota leva-nos até ao controller de licença
-Route::get("licenca",[LicencaController::class,"showLicencaForm"])->name("licenca");
+//Esta rota leva-nos até ao controller de licença (Retorna Formulario de Licença)
+Route::get("license",[LicencaController::class,"showLicenseForm"])->name("license");
 
-//Esta rota leva-nos até ao controller de licença
-Route::post("licenca",[LicencaController::class,"activarlicenca"])->name("ActivarLicenca");
+//Esta rota leva-nos até ao controller de licença(Consulta Maquina com Licença)
+Route::get("/",[LicencaController::class,"queryMachine"])->name("welcome");
+
+//Esta Rota leva ate ao formulario de login do Aluno(Secretaria-Online)
+Route::get("aluno/login",[AuthController::class,"showLoginFormAluno"])->name("loginAluno");
+
+ 
   

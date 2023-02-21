@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>CarGeste | Entrar</title>
+    <title>CarGeste | Activar</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -69,13 +69,13 @@
 	<div class="error-pagewrap">
 		<div class="error-page-int">
 			<div class="text-center m-b-md custom-login">
-               <a href="{{route("welcome")}}"> <img src="img/logo/logo.png" alt=""></a>
+               <a href="#"> <img src="img/logo/logo.png" alt=""></a>
 			</div>
 			<div class="content-error">
 				<div class="hpanel">
                     <div class="panel-body">
 
-                        <form action="{{route("ActivarLicenca")}}" id="loginForm" method="post">
+                        <form action="#" id="loginForm" method="post">
                         @csrf
                             <div class="form-group">
                                 <label class="control-label" for="chave">Chave de Licença</label>

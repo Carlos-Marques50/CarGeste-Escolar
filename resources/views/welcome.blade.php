@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>CarGeste-Escolar</title>
+    <title>CarGeste | Seja Bem-Vindo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
       body {
@@ -25,11 +25,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{route("login")}}">Entrar</a>
+            <a class="nav-link" href="{{route("loginAluno")}}">Secretaria-Online</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{route("licenca")}}">Activar-Licença</a>
+            <a class="nav-link" href="{{route("login")}}">Entrar</a>
           </li>
 
           <li class="nav-item">
@@ -64,3 +64,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>
+a

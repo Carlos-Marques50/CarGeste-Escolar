@@ -13,8 +13,8 @@ class AuthController extends Controller
         return view("auth.login");
     }
 
-    public function Login(){
-        // Logica Para Login do Usuario
-
+    //Metodo para apresentar o formulario de Login do Aluno
+    public function showLoginFormAluno(){
+        return view("aluno.login");
     }
 }
