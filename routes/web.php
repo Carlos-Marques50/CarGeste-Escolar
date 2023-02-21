@@ -28,5 +28,4 @@ Route::get("/",[LicencaController::class,"queryMachine"])->name("welcome");
 //Esta Rota leva ate ao formulario de login do Aluno(Secretaria-Online)
 Route::get("aluno/login",[AuthController::class,"showLoginFormAluno"])->name("loginAluno");
 
- 
-  
+

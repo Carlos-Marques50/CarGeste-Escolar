@@ -76,7 +76,7 @@ class LicencaController extends Controller
             }
         }
         
-        if($resMachine){
+        if(!$resMachine){
             return view("welcome");
         }else {
            return $this->showLicenseForm();  
