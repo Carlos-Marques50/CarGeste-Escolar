@@ -79,7 +79,7 @@
             @csrf
                 <div class="form-group">
                   <label class="control-label" for="chave">Chave de Activação</label>
-                  <input type="text" value="{{hash("sha256","Windows-10-27-02-23")}}" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
+                  <input type="text" value="{{hash("sha256","0A-00-27-00-00-0A-10-27-02-23")}}" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
                   <span class="help-block small">Recomendamos aos Parceiros e Técnicos "Copiar e Colar" a Chave de Ativação</span>
                 </div>
  
