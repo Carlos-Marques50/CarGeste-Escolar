@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>CarGeste | Activar</title>
+    <title>CarGeste | Activar Maquina</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -73,80 +73,40 @@
 			</div>
 			<div class="content-error">
 				<div class="hpanel">
-                    <div class="panel-body">
+          <div class="panel-body">
 
-                        <form action="#" id="loginForm" method="post">
-                        @csrf
-                            <div class="form-group">
-                                <label class="control-label" for="chave">Chave de Licença</label>
-                                <input type="text" placeholder="Código de activição" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
-                                <span class="help-block small">Recomendamos Copiar e Colar a "Chave de Acticação" enviada no seu E-mail</span>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-success btn-block loginbtn">Activar</button>
-                            <br>
-                            @if (session('erro'))
-                                <div class="alert alert-danger">
-                                    {{ session('erro') }}
-                                </div>
-                            @endif
-
-                        </form>
-                            
-                    </div>
+            <form action="#" method="post" id="loginForm">
+            @csrf
+                <div class="form-group">
+                  <label class="control-label" for="chave">Chave de Activação</label>
+                  <input type="text" value="{{hash("sha256","Windows-10-27-02-23")}}" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
+                  <span class="help-block small">Recomendamos aos Parceiros e Técnicos "Copiar e Colar" a Chave de Ativação</span>
                 </div>
+ 
+                <button type="submit" class="btn btn-danger btn-block">Activar Maquina</button>
+                <a class="btn btn-info btn-block loginbtn" role="button" href={{route("requestLicenseForm")}}>Pedir "Chave de Activação</a>
+                <br>
+
+                @if(session('machine'))
+                  <div class="alert alert-danger">
+                    {{session('machine')}}
+                  </div>
+                @endif
+
+            </form> 
+            
+            
+                        
+          </div>
+        </div>
 			</div>
+
 			<div class="text-center login-footer">
 				<p> ©2023. Todos os direitos reservados. Desenvolvido por:<a href="#"> Carlos A.Marques</a></p>
 			</div>
 		</div>   
     </div>
-    <!-- jquery
-		============================================ -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <!-- bootstrap JS
-		============================================ -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- wow JS
-		============================================ -->
-    <script src="js/wow.min.js"></script>
-    <!-- price-slider JS
-		============================================ -->
-    <script src="js/jquery-price-slider.js"></script>
-    <!-- meanmenu JS
-		============================================ -->
-    <script src="js/jquery.meanmenu.js"></script>
-    <!-- owl.carousel JS
-		============================================ -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- sticky JS
-		============================================ -->
-    <script src="js/jquery.sticky.js"></script>
-    <!-- scrollUp JS
-		============================================ -->
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <!-- mCustomScrollbar JS
-		============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>knd
-    <!-- metisMenu JS
-		============================================ -->
-    <script src="js/metisMenu/metisMenu.min.js"></script>
-    <script src="js/metisMenu/metisMenu-active.js"></script>
-    <!-- tab JS
-		============================================ -->
-    <script src="js/tab.js"></script>
-    <!-- icheck JS
-		============================================ -->
-    <script src="js/icheck/icheck.min.js"></script>
-    <script src="js/icheck/icheck-active.js"></script>
-    <!-- plugins JS
-		============================================ -->
-    <script src="js/plugins.js"></script>
-    <!-- main JS
-		============================================ -->
-    <script src="js/main.js"></script>
-   
+    
 </body>
 
 </html>

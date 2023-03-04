@@ -7,22 +7,22 @@ use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use Symfony\Component\Process\Process;
 
-class LicencaController extends Controller
-{
+class MaquinaController extends Controller{
+
     //Metodo para apresentar o formulario de licença
     public function showLicenseForm(){
         return view("license.index");
     }
 
-    //Metodo que busca dados da Maquina . 
+    //Metodo que busca dados da Maquina. 
     private function machine(){
     
         $agent= new Agent(); //Instanciamento da class Agent do Pacote de Terceiro do Laravel chamado Jenssegers
         $is_desktop=$agent->isDesktop();
 
         if (!$is_desktop) { //Aqui estou a condicionar se a maquina é um desktop
-            $msg='Lamentamos! A licença não pode ser activada por meio desta plataforma.';
-            return back()->with('erro', $msg);
+            $msg='Lamentamos! O sistema não pode ser usado por meio desta plataforma';
+            return back()->with('machine', $msg);
         }
        
         //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Windows)
@@ -53,20 +53,21 @@ class LicencaController extends Controller
             }
             $macAddress = preg_replace('/\s+/', '', $process->getOutput());
         }
+
         $dados_maquina= array(
             "system"=>$agent->platform(),
             "version"=>$agent->version($agent->platform()), 
             "mac"=> $macAddress
-        );
+        ); 
 
         return $dados_maquina;
     } 
 
-    //Metodo para consultar maquina registada no sistema
+    //Metodo para consultar maquina registada no DataBase
     public function queryMachine(){
 
-        $maquinas= Maquina::all();
-        $machine=$this->machine();
+        $maquinas= Maquina::all();//Model Maquina
+        $machine=$this->machine(); //variavel esta recebendo o metodo que busca os dados da Maquina.
         $resMachine=false; //variável iniciada como falsa antes do loop
 
         foreach($maquinas as $maquina){     
@@ -75,11 +76,17 @@ class LicencaController extends Controller
                 break;//Parar o Loop quando a maquina for encontrada
             }
         }
-        
-        if(!$resMachine){
-            return view("welcome");
+
+        if($resMachine){
+            //Caso a Maquina for encontrada no DataBase ele retornara a view
+            return view("welcome"); 
         }else {
-           return $this->showLicenseForm();  
+            //Caso não seja, ele retornara a função "ShowLicenseForm".  
+            return $this->showLicenseForm();  
         }
+    //End of Function "queryMachine"
     }
+
+//End of Class "MaquinaController"
 }
+    
