@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Parceiro extends Model
 {
     use HasFactory;
-    protected $table="parceiro";
+    protected $table="parceiros"; //Refencias a tabela do Banco de Dados 
 
     protected $fillable=[
         "username",	
@@ -17,8 +17,10 @@ class Parceiro extends Model
         "code_parceiro",	
         "state"
     ];
-
+    
+    //Metodo esta a atrelar o Parceiro a tabela(Model) License com o seu ID 
     public function licenses(){
-        return $this->hasMany(License::class, "id_parceiro");
+        return $this->hasMany(License::class,"id_parceiros");
     }
+   
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maquina;
-use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use Symfony\Component\Process\Process;
 
@@ -14,44 +13,55 @@ class MaquinaController extends Controller{
         return view("license.index");
     }
 
-    //Metodo que busca dados da Maquina. 
-    private function machine(){
-    
-        $agent= new Agent(); //Instanciamento da class Agent do Pacote de Terceiro do Laravel chamado Jenssegers
-        $is_desktop=$agent->isDesktop();
-
-        if (!$is_desktop) { //Aqui estou a condicionar se a maquina é um desktop
+    //Metodo para fazer o controler do tipo de Maquina
+    public static function controleTypeMachine(){
+        $agent= new Agent();
+        if (!$agent->isDesktop()) { //Aqui estou a condicionar se a maquina não for um desktop
             $msg='Lamentamos! O sistema não pode ser usado por meio desta plataforma';
             return back()->with('machine', $msg);
         }
-       
-        //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Windows)
-        if($agent->platform()=="Windows"){
-            $macAddress = exec("getmac"); //função para executar comando do sistema operacional(getMac)
+    }
+    //Metodo que busca dados da Maquina. 
+    public static function machine(){
+        
+        $agent= new Agent();
+
+        switch($agent->platform()){
+
+            //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Windows)
+            case 'Windows':
+                $macAddress = exec("getmac"); //função para executar comando do sistema operacional(getMac)
                 // Filtra o resultado para encontrar o endereço MAC
                 if (preg_match('/([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})/', $macAddress, $matches)){
                     $macAddress = $matches[0];
                 }
-        }
-        //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Ubunto-Linux)
-        if($agent->platform()=="Ubuntu" ){
-            $process = new Process(['cat', '/sys/class/net/eth0/address']);
-            $process->run();
+                break;
 
-            if (!$process->isSuccessful()) {
-                throw new \RuntimeException($process->getErrorOutput());
-            }
-            $macAddress = trim($process->getOutput());
-        }
-        //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Mac)
-        if($agent->platform()=="OS X"){            
-            $process = new Process(['networksetup', '-getmacaddress', 'en0']);
-            $process->run();
+            //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Ubunto-Linux)    
+            case 'Ubuntu':
+                $process = new Process(['cat', '/sys/class/net/eth0/address']);
+                $process->run();
+    
+                if (!$process->isSuccessful()) {
+                    throw new \RuntimeException($process->getErrorOutput());
+                }
+                $macAddress = trim($process->getOutput());
+                break;
 
-            if (!$process->isSuccessful()) {
-                throw new \RuntimeException($process->getErrorOutput());
-            }
-            $macAddress = preg_replace('/\s+/', '', $process->getOutput());
+             //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Mac)    
+            case 'OS X':
+                $process = new Process(['networksetup', '-getmacaddress', 'en0']);
+                $process->run();
+    
+                if (!$process->isSuccessful()) {
+                    throw new \RuntimeException($process->getErrorOutput());
+                }
+                $macAddress = preg_replace('/\s+/', '', $process->getOutput());
+                break;
+            
+            default:
+                $msg='Lamentamos! O sistema não pode ser usado por meio desta plataforma';
+                return back()->with('machine', $msg);   
         }
 
         $dados_maquina= array(
@@ -66,6 +76,7 @@ class MaquinaController extends Controller{
     //Metodo para consultar maquina registada no DataBase
     public function queryMachine(){
 
+        $this->controleTypeMachine();
         $maquinas= Maquina::all();//Model Maquina
         $machine=$this->machine(); //variavel esta recebendo o metodo que busca os dados da Maquina.
         $resMachine=false; //variável iniciada como falsa antes do loop
@@ -78,10 +89,10 @@ class MaquinaController extends Controller{
         }
 
         if($resMachine){
-            //Caso a Maquina for encontrada no DataBase ele retornara a view
+            //Caso a Maquina for encontrada no DataBase o sistema retornara a view(Bem-Vindo)
             return view("welcome"); 
         }else {
-            //Caso não seja, ele retornara a função "ShowLicenseForm".  
+            //Caso não seja encontrada, o sistema retornara a função "ShowLicenseForm".  
             return $this->showLicenseForm();  
         }
     //End of Function "queryMachine"
@@ -89,4 +100,3 @@ class MaquinaController extends Controller{
 
 //End of Class "MaquinaController"
 }
-    

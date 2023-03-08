@@ -63,6 +63,7 @@
 </head>
 
 <body>
+  
     <!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -78,12 +79,13 @@
             <form action="#" method="post" id="loginForm">
             @csrf
                 <div class="form-group">
+
                   <label class="control-label" for="chave">Chave de Activação</label>
-                  <input type="text" value="{{hash("sha256","0A-00-27-00-00-0A-10-27-02-23")}}" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
+                  <input type="text" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
                   <span class="help-block small">Recomendamos aos Parceiros e Técnicos "Copiar e Colar" a Chave de Ativação</span>
                 </div>
  
-                <button type="submit" class="btn btn-danger btn-block">Activar Maquina</button>
+                <button type="button" class="btn btn-danger btn-block">Activar Maquina</button>
                 <a class="btn btn-info btn-block loginbtn" role="button" href={{route("requestLicenseForm")}}>Pedir "Chave de Activação</a>
                 <br>
 

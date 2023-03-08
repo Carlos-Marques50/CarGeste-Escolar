@@ -82,7 +82,7 @@
                               <div class="alert alert-danger">
                                 {{session('requestLicense')}}
                               </div>
-                            @endif
+                      @endif
                         <form action={{route("requestLicense")}} id="loginForm" method="post">
                         @csrf
                             <div class="form-group">

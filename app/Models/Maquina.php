@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Maquina extends Model
 {
     use HasFactory;
-    protected $table="maquina";
+    protected $table="maquinas";
 
     protected $fillable=[
-        "SO",
-        "versao",
-        "macSO"	
-    ];
+        'SO',
+        'versao',
+        'macSO'
 
-    //Relação entre as tabelas
+    ];
+    
+   //Metodo esta a atrelar o Parceiro a tabela(Model) License com o seu ID 
     public function licenses(){
         return $this->hasMany(License::class,"id_maquina");
     }
+  
 }

@@ -32,4 +32,4 @@ Route::get("license/resquestLicense",[LicenseController::class,"requestLicenseFo
 //Esta rota leva-nos até ao controller de licença (Retorna Formulario de Licença)
 Route::get("license",[MaquinaController::class,"showLicenseForm"])->name("license");
 
-Route::post("license",[LicenseController::class,"requestLicense"])->name("requestLicense");
+Route::post("/",[LicenseController::class,"requestLicense"])->name("requestLicense");
