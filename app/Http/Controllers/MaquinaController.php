@@ -8,6 +8,18 @@ use Symfony\Component\Process\Process;
 
 class MaquinaController extends Controller{
 
+
+    public function page(){
+
+        if($this->queryMachine()){
+            //Caso a Maquina for encontrada no DataBase o sistema retornara a view(Bem-Vindo)
+            return view("welcome"); 
+        }else {
+            //Caso não seja encontrada, o sistema retornara a função "ShowLicenseForm".  
+            return $this->showLicenseForm();  
+        }
+    }
+
     //Metodo para apresentar o formulario de licença
     public function showLicenseForm(){
         return view("license.index");
@@ -90,12 +102,16 @@ class MaquinaController extends Controller{
 
         if($resMachine){
             //Caso a Maquina for encontrada no DataBase o sistema retornara a view(Bem-Vindo)
-            return view("welcome"); 
+            return true; 
         }else {
             //Caso não seja encontrada, o sistema retornara a função "ShowLicenseForm".  
-            return $this->showLicenseForm();  
+            return false;  
         }
     //End of Function "queryMachine"
+    }
+
+    public function test(){
+        return view("admin/licencas");
     }
 
 //End of Class "MaquinaController"
