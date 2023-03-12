@@ -3,10 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LicenseController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaquinaController;
+use App\Http\Controllers\ParceiroController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Collection;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +40,10 @@ Route::post("/",[LicenseController::class,"requestLicense"])->name("requestLicen
 
 //Grupo de Rotas do Admin
 Route::prefix("admin")->group(function(){
-    Route::get("license", [AdminController::class,"licenseForm"])->name("license");
-    Route::get("parceiros",[AdminController::class,"parceiroForm"])->name("parceiros");
+    Route::get("license", [AdminController::class,"showLicense"])->name("showLicense");
+    Route::get("parceiros",[AdminController::class,"showParceiros"])->name("showParceiros");
     Route::get("cadastrar",[AdminController::class,"cadastrarForm"])->name("cadastrarParceiro");
-    Route::post("cadastrar",[AdminController::class,"store"])->name("storeParceiro");
+    Route::post("cadastrar",[AdminController::class,"storeParceiro"])->name("storeParceiro");
+    Route::put("parceiros/{id}",[AdminController::class,'changeState'])->name("changeState");
     //Route::post("cadastrar",[AdminController::class,"test"])->name("test");
 });

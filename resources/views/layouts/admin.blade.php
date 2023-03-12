@@ -97,13 +97,13 @@
                     <br><br>
 
                         <li>
-                            <a href={{route("license")}} aria-expanded="false"> 
+                            <a href={{route("showLicense")}} aria-expanded="false"> 
                                 <span class="mini-click-non"> + Licenças</span>
                             </a>
                         </li>
                         
                         <li>
-                            <a href={{route("parceiros")}} aria-expanded="false"> 
+                            <a href={{route("showParceiros")}} aria-expanded="false"> 
                                 <span class="mini-click-non"> + Parceiros</span>
                                 
                             </a>

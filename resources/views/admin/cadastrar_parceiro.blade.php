@@ -3,8 +3,6 @@
 @section("title","Cadastrar Parceiro")
 @section("conteudo")
 
-       
-
             @if(session('successCadastro'))
                 <div class="alert alert-success">
                     {{session('successCadastro')}}

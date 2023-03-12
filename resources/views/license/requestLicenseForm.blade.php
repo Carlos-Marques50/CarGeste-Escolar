@@ -77,33 +77,60 @@
 			</div>
 			<div class="content-error">
 				<div class="hpanel">
-                    <div class="panel-body">
-                      @if(session('requestLicense'))
-                              <div class="alert alert-danger">
-                                {{session('requestLicense')}}
-                              </div>
-                      @endif                                                            
+                  <div class="panel-body">
+                    @if(session('sucessRequestLicense'))
+                        <div class="alert alert-success">
+                            {{session('sucessRequestLicense')}}
+                        </div>
+                    @endif
+                    @if(session('errorRequestLicense'))
+                      <div class="alert alert-danger">
+                          {{session('errorRequestLicense')}}
+                      </div>
+                    @endif    
+                    @if(session('inactiveRequestLicense'))
+                      <div class="alert alert-danger">
+                          {{session('inactiveRequestLicense')}}
+                      </div>
+                    @endif   
+                    @if(session('errorDadosRequestLicense'))
+                      <div class="alert alert-danger">
+                          {{session('errorDadosRequestLicense')}}
+                      </div>
+                    @endif                                                          
                         <form action={{route("requestLicense")}} id="loginForm" method="post">
                         @csrf
                             <div class="form-group">
                                 <label class="control-label" for="username">Nome do Usuario</label>
-                                <input type="text" value="Cardoso Mafata" placeholder="Cardoso Mafata" required autofocus name="username" id="username" class="form-control">
+                                <input type="text" value="{{old("username")}}" placeholder="Ex: Cardoso Mafata" autofocus name="username" id="username" class="form-control">
+                                @error("username")
+                                  <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label" for="email">E-mail</label>
-                                <input type="email" value="cardoso@parceiro.com" placeholder="exemplificando@exemplo.com" required name="email" id="email" class="form-control">
+                                <input type="email" value="{{old("email")}}" placeholder="exemplificando@exemplo.com" name="email" id="email" class="form-control">
                                 <span class="help-block small">Digite um Email valido para receber a "Chave de Activação"</span>
+                                @error('email')
+                                  <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label" for="parceiro">Código de Parceiria</label>
-                                <input type="password" value="Parceiro001" placeholder="###############################" required name="code_parceiro" id="parceiro" class="form-control">
+                                <input type="number" value="{{old("code_parceiro")}}" placeholder="#####" name="code_parceiro" id="parceiro" class="form-control">
+                                @error("code_parceiro")
+                                  <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label" for="senha">Password</label>
-                                <input type="password" value="password" placeholder="*****************" required name="password" id="senha" class="form-control">
+                                <input type="password" value="{{old("password")}}" placeholder="*****************" name="password" id="senha" class="form-control">
+                                @error("password")
+                                  <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-danger btn-block">Pedir "Chave de Activação"</button>
                             <button type="submit" class="btn btn-primary btn-block">Renovar "Chave de Activação"</button>
