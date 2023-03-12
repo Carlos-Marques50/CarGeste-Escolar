@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LicenseController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaquinaController;
+use App\Http\Controllers\ParceiroController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Collection;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Esta rota leva-nos até ao controller de licença(Consulta Maquina com Licença)
-Route::get("/",[MaquinaController::class,"queryMachine"])->name("queryMachine");
+Route::get("/",[MaquinaController::class,"page"])->name("queryMachine");
 
 //Esta rota leva-nos até ao controller de auth
 Route::get("login",[AuthController::class,"showLoginForm"])->name("login");
@@ -32,4 +35,15 @@ Route::get("license/resquestLicense",[LicenseController::class,"requestLicenseFo
 //Esta rota leva-nos até ao controller de licença (Retorna Formulario de Licença)
 Route::get("license",[MaquinaController::class,"showLicenseForm"])->name("license");
 
+//Esta rota leva-nos ao metodo que processa o pedido de licenças
 Route::post("/",[LicenseController::class,"requestLicense"])->name("requestLicense");
+
+//Grupo de Rotas do Admin
+Route::prefix("admin")->group(function(){
+    Route::get("license", [AdminController::class,"showLicense"])->name("showLicense");
+    Route::get("parceiros",[AdminController::class,"showParceiros"])->name("showParceiros");
+    Route::get("cadastrar",[AdminController::class,"cadastrarForm"])->name("cadastrarParceiro");
+    Route::post("cadastrar",[AdminController::class,"storeParceiro"])->name("storeParceiro");
+    Route::put("parceiros/{id}",[AdminController::class,'changeState'])->name("changeState");
+    //Route::post("cadastrar",[AdminController::class,"test"])->name("test");
+});
