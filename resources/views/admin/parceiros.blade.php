@@ -6,15 +6,26 @@
 <h2>Parceiros <span class="badge bg-secondary">Actualizados</span></h2>
 <hr><br>
     @if(session("parceiroDesbloqueado"))
-        <div class="alert alert-info">
+        <div class="alert alert-success">
             {{session('parceiroDesbloqueado')}}
         </div>
     @endif
     @if(session("parceiroBloquedo"))
-        <div class="alert alert-info">
+        <div class="alert alert-danger">
             {{session('parceiroBloquedo')}}
         </div>
     @endif
+    @if(session("successUpdateParceiro"))
+    <div class="alert alert-success">
+        {{session('successUpdateParceiro')}}
+    </div>
+    @endif
+    @if(session("errorUpdateParceiro"))
+    <div class="alert alert-danger">
+        {{session('errorUpdateParceiro')}}
+    </div>
+    @endif
+
 <table class="table table-hover">
 
     <thead>
@@ -35,17 +46,17 @@
         <td>{{$parceiro->username}}</td>
         <td>{{$parceiro->code_parceiro}}</td>
         <td>{{$parceiro->email}}</td>
-        <td>{{$parceiro->created_at}}</td>
+        <td>{{$parceiro->created_at->format("d-m-Y")}}</td>
         <td>{{$parceiro->state}}</td>
         <td>
-            <form action={{route('changeState',[$parceiro->id] )}} method="post">
+            <form action={{route('changeStateParceiro',['id'=>$parceiro->id])}} method="post">
             @csrf
             @method("PUT")
-                <a class="btn btn-info">Editar</a>
+                <a href={{route("edit_parceiro",["id"=>$parceiro->id])}} class="btn btn-info">Editar</a>
                 @if($parceiro->state=="Active")
                     <button type="submit" class="btn btn-danger">Bloquear</button>
                 @else
-                    <button type="submit" class="btn btn-success">Desbloquear</button>
+                    <button type="submit" class="btn btn-success">Activar</button>
                 @endif
 
             </form>

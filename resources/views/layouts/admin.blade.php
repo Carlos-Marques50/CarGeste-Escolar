@@ -104,8 +104,13 @@
                         
                         <li>
                             <a href={{route("showParceiros")}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Parceiros</span>
-                                
+                                <span class="mini-click-non"> + Parceiros</span> 
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href={{route("showUsuarios")}} aria-expanded="false"> 
+                                <span class="mini-click-non"> + Usuarios</span>
                             </a>
                         </li>
 
@@ -116,7 +121,7 @@
                         </li>
 
                         <li>
-                            <a href="#" aria-expanded="false"> 
+                            <a href={{route('cadastrarUsuario')}} aria-expanded="false"> 
                                 <span class="mini-click-non"> + Cadastrar Usuario</span>
                             </a>
                         </li>
@@ -172,10 +177,17 @@
                                                         <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic">
                                                             </span>Meu perfil</a>
                                                         </li>
-                                    
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic">
-                                                            </span>Sair</a>
-                                                        </li>
+                                                        
+                                                        <form action={{route('logout')}} method="POST" id="logout">
+                                                        @csrf
+                                                            <li>
+                                                                <a onclick="document.getElementById('logout').submit();">
+                                                                    <span class="edu-icon edu-locked author-log-ic"></span>
+                                                                    Sair
+                                                                </a>
+                                                            </li>  
+                                                        </form>
+                                                        
                                                     </ul>
                                                 </li>
                                          
