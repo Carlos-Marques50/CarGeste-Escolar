@@ -53,8 +53,4 @@ Route::prefix("auth")->group(function(){
     Route::post("checkLogin",[AuthController::class,'checkLogin'])->name("checkLogin");
     Route::post("logout",[AuthController::class,'logout'])->name("logout");
     Route::delete("apagar/{id}",[AuthController::class, 'destroy'])->name('destroy');
-   
-
-
-
 }); 
