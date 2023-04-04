@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section("title","Cadastrar Usuario")
+
 @section("conteudo")
 
             @if(session('successCadastroUsuario'))

@@ -250,12 +250,12 @@ class AdminController extends Controller
         ];
 
         $mesagens=[
-            'username.unique'=>'Infelizmente o nome de parceiro que acabou de colacar já esta a ser usado no sistema',
+            'username.unique'=>'Infelizmente o nome de parceiro que acabou de inserir    já esta a ser usado no sistema',
             'username.max'=>'Este nome de Parceiro não pode conter mais de 30 caracter',
             'username.min'=>'Este nome de Parceiro não pode conter menos de 5 caracter',
 
             'email.email'=>'Este campo deve conter um Email valido',
-            'email.unique'=>'Infelizmente, o email que acabou de colacar já esta a ser usado por um outro Parceiro no sistema',
+            'email.unique'=>'Infelizmente, o email que acabou de inserir já esta a ser usado por um outro Parceiro no sistema',
 
             '*.required'=>'Este campo deve ser preenchido',
         ];
@@ -271,11 +271,11 @@ class AdminController extends Controller
             "email"=>$request->email
         ];
 
-        if (!$parceiro->update($dados)) {
+        if ($parceiro->update($dados)) {
             $msg="Parceiro Actualizado com Sucesso...";
             return redirect("admin/parceiros")->with("successUpdateParceiro",$msg);
         }else {
-            $msg="Erro!. Não foi possivel actualizar os dados do Parceiro...";
+            $msg="Erro! Não foi possivel actualizar os dados do Parceiro...";
             return redirect("admin/parceiros")->with("errorUpdateParceiro",$msg);
         }
 

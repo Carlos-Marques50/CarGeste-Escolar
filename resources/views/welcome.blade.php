@@ -25,11 +25,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{route("loginAluno")}}">Secretaria-Online</a>
+            <a class="nav-link" href="#">Secretaria-Online</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{route("login")}}">Login</a>
+            <a class="nav-link" href="#">Login</a>
           </li>
 
           <li class="nav-item">

@@ -21,14 +21,12 @@ use Illuminate\Support\Facades\Route;
 //Esta rota leva-nos até ao controller de licença(Consulta Maquina com Licença)
 Route::get("/",[MaquinaController::class,"page"])->name("queryMachine");
 
-//Esta rota leva os usuarios(Tecnicos ou Parceiros) aos seus formularios de pedido de Licenças
-Route::get("license/resquestLicense",[LicenseController::class,"requestLicenseForm"])->name("requestLicenseForm");
+Route::prefix("license")->group(function(){
+    Route::get("license",[MaquinaController::class,"showLicenseForm"])->name("license");
+    Route::get("resquestLicense",[LicenseController::class,"requestLicenseForm"])->name("requestLicenseForm");
+    Route::post("resquestLicense",[LicenseController::class,"requestLicense"])->name("requestLicense");
 
-//Esta rota leva-nos até ao controller de licença (Retorna Formulario de Licença)
-Route::get("license",[MaquinaController::class,"showLicenseForm"])->name("license");
-
-//Esta rota leva-nos ao metodo que processa o pedido de licenças
-Route::post("/",[LicenseController::class,"requestLicense"])->name("requestLicense");
+});
 
 //Grupo de Rotas do Admin
 Route::prefix("admin")->middleware("auth")->group(function(){
@@ -50,6 +48,7 @@ Route::prefix("admin")->middleware("auth")->group(function(){
 //Grupo de Rotas para tratamento de Login
 Route::prefix("auth")->group(function(){
     Route::get("login",[AuthController::class,"showLoginForm"])->name("login");
+    Route::post("cadastrar",[AuthController::class,'creatUser'])->name('creatUser');
     Route::post("checkLogin",[AuthController::class,'checkLogin'])->name("checkLogin");
     Route::post("logout",[AuthController::class,'logout'])->name("logout");
     Route::delete("apagar/{id}",[AuthController::class, 'destroy'])->name('destroy');

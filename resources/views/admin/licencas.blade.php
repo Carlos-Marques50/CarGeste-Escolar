@@ -25,7 +25,7 @@
         <td>@mdo</td>
         <td>
             <a class="btn btn-info">Editar</a>
-            <a class="btn btn-danger">Apagar</a>
+            <a class="btn btn-danger">Bloqueadas</a>
         </td>
     </tr> 
     <tr>
@@ -35,7 +35,7 @@
         <td>@mdo</td>
         <td>
             <a href="#" class="btn btn-info">Editar</a>
-            <a href="#" class="btn btn-danger">Apagar</a>
+            <a href="#" class="btn btn-danger">Bloqueadas</a>
         </td>
     </tr> 
     </tbody>

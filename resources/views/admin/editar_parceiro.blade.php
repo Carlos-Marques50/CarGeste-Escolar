@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section("title","Editar Parceiro")
+
 @section("conteudo")
 
             @if(session('successCadastroUsuario'))

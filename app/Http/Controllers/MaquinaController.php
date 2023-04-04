@@ -28,16 +28,17 @@ class MaquinaController extends Controller{
     //Metodo para fazer o controler do tipo de Maquina
     public static function controleTypeMachine(){
         $agent= new Agent();
-        if (!$agent->isDesktop()) { //Aqui estou a condicionar se a maquina não for um desktop
-            $msg='Lamentamos! O sistema não pode ser usado por meio desta plataforma';
+        if (!
+        $agent->isDesktop()) { //Aqui estou a condicionar se a maquina não for um desktop
+            $msg='Lamentamos! Dispositivo não Suportado... ';
             return back()->with('machine', $msg);
         }
     }
+
     //Metodo que busca dados da Maquina. 
     public static function machine(){
         
         $agent= new Agent();
-
         switch($agent->platform()){
 
             //Buscando o Endereço Mac de uma Maquina com Sistema Operativo (Windows)
@@ -88,14 +89,14 @@ class MaquinaController extends Controller{
     //Metodo para consultar maquina registada no DataBase
     public function queryMachine(){
 
-        $this->controleTypeMachine();
-        $maquinas= Maquina::all();//Model Maquina
+        $this->controleTypeMachine(); //Metodo para controlar a Plataforma acessada 
+        $maquinas= Maquina::all();//Modelo da Maquina
         $machine=$this->machine(); //variavel esta recebendo o metodo que busca os dados da Maquina.
         $resMachine=false; //variável iniciada como falsa antes do loop
 
         foreach($maquinas as $maquina){     
             if($maquina->SO==$machine["system"] && $maquina->versao==$machine["version"] && $maquina->macSO==$machine["mac"]){
-                $resMachine=true; //Aceitando a existencia da maquina no Database
+                $resMachine=true; //Atribuindo True na Variavel para aceitação da existencia da maquina no Database
                 break;//Parar o Loop quando a maquina for encontrada
             }
         }
@@ -108,10 +109,6 @@ class MaquinaController extends Controller{
             return false;  
         }
     //End of Function "queryMachine"
-    }
-
-    public function test(){
-        return view("admin/licencas");
     }
 
 //End of Class "MaquinaController"

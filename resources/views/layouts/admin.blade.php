@@ -97,7 +97,7 @@
                     <br><br>
 
                         <li>
-                            <a href={{route("showLicense")}} aria-expanded="false"> 
+                            <a aria-invalid="" href={{route("showLicense")}} aria-expanded="false"> 
                                 <span class="mini-click-non"> + Licenças</span>
                             </a>
                         </li>
@@ -109,21 +109,30 @@
                         </li>
                         
                         <li>
-                            <a href={{route("showUsuarios")}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Usuarios</span>
-                            </a>
+                            @if(session("cargo"))
+                                <a href={{route("showUsuarios")}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Usuarios</span>
+                                </a>
+                            @endif
+                            
                         </li>
 
                         <li>
-                            <a href={{route("cadastrarParceiro")}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Cadastrar Parceiros</span>
-                            </a>
+                            @if(session("cargo"))
+                                <a href={{route("cadastrarParceiro")}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Cadastrar Parceiros</span>
+                                </a>
+                            @endif
+                            
                         </li>
 
                         <li>
-                            <a href={{route('cadastrarUsuario')}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Cadastrar Usuario</span>
-                            </a>
+                            @if(session("cargo"))
+                                <a href={{route('cadastrarUsuario')}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Cadastrar Usuario</span>
+                                </a>
+                            @endif
+                           
                         </li>
                         
                     </ul>
@@ -169,7 +178,7 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 															
-															<span class="admin-name">Admin</span>
+															<span class="admin-name">{{ session("username") }}</span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
