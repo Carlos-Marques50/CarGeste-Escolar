@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
-@section("title","Cadastrar Parceiro")
+@section("title","Editar Parceiro")
 
 @section("conteudo")
 
-            @if(session('successCadastroParceiro'))
+            @if(session('successCadastroUsuario'))
                 <div class="alert alert-success">
-                    {{session('successCadastroParceiro')}}
+                    {{session('successCadastroUsuario')}}
                 </div>
             @endif
-            @if(session('errorCadastroParceiro'))
+            @if(session('errorCadastroUsuario'))
                 <div class="alert alert-danger">
-                    {{session('errorCadastroParceiro')}}
+                    {{session('errorCadastroUsuario')}}
                 </div>
             @endif
        
@@ -19,7 +19,7 @@
                     <div class="product-payment-inner-st">
 
                         <ul id="myTabedu1" class="tab-review-design">
-                            <li class="active"><a href="#description">Cadastrar Parceiro</a></li>
+                            <li class="active"><a href="#description">Editar Parceiro</a></li>
                         </ul>
 
                         <div id="myTabContent" class="tab-content custom-product-edit">
@@ -28,38 +28,37 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
                     
-                                                <form action={{route("storeParceiro")}} method="post" class="dropzone dropzone-custom needsclick add-professors" id="demo1-upload">
+                                                <form action={{route("updateParceiro", ['id'=>$parceiro->id]) }} method="post" class="dropzone dropzone-custom needsclick add-professors">
                                                     @csrf
+                                                    @method("PUT")
+                                                    
                                                     <div class="row">
-
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <input name="username" value="{{old("username")}}" autofocus type="text" class="form-control" placeholder="Nome do Usuario">
+                                                                <label for="username">Nome:</label>
+                                                                <input name="username" value="{{$parceiro->username}}" type="text" id="username" class="form-control" placeholder="Nome">
                                                                 @error('username')
                                                                     <div class="alert alert-danger">{{$message}}</div>
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="email" value="{{old("email")}}" type="email" class="form-control" placeholder="Email">
+                                                                <label for="email">Email:</label>
+                                                                <input name="email" value="{{$parceiro->email}}" type="email" id="email" class="form-control" placeholder="Email">
                                                                 @error('email')
                                                                     <div class="alert alert-danger">{{$message}}</div>
                                                                 @enderror
                                                             </div>
-                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Cadastrar Parceiro</button>                                  
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Editar Parceiro</button>                                  
                                                         </div>
 
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                             <div class="form-group">
-                                                                <input name="password" value="{{old("password")}}" type="password" class="form-control" placeholder="Password">
-                                                                @error('password')
-                                                                    <div class="alert alert-danger">{{$message}}</div>
-                                                                @enderror
+                                                                <label for="password">Password:</label>
+                                                                <input name="password_confirmation" value={{$parceiro->senha}} @disabled(true) id="password" type="password" class="form-control" placeholder="Password">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input name="password_confirmation" value="{{old("password_confirmation")}}" type="password" class="form-control" placeholder="Confirmação da Password">
-                                                                @error('password_confirmation')
-                                                                    <div class="alert alert-danger">{{$message}}</div>
-                                                                @enderror
+                                                                <label for="password_confirmation">Confirmação da Password:</label>
+                                                                <input name="password" value={{$parceiro->senha}} @disabled(true) type="password" id="password_confirmation" class="form-control" placeholder="Confirmação da Password">
                                                             </div>
                                                         </div>
 
@@ -71,8 +70,5 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-   
+                        </div>   
 @endsection

@@ -81,11 +81,11 @@
                 <div class="form-group">
 
                   <label class="control-label" for="chave">Chave de Activação</label>
-                  <input type="text" placeholder="Código da Licença" required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
-                  <span class="help-block small">Recomendamos aos Parceiros e Técnicos "Copiar e Colar" a Chave de Ativação</span>
+                  <input type="text" placeholder="Código da Licença" {{session('machine') ? 'disabled' : '' }} required autofocus title="Cola a Chave de activação que a CarGeste Enviou" name="key" id="chave" class="form-control">
+                  <span class="help-block small">Recomendamos aos Parceiros e Técnicos "Copiar e Colar" a Chave de Activação</span>
                 </div>
  
-                <button type="button" class="btn btn-danger btn-block">Activar Maquina</button>
+                <button {{session('machine') ? 'disabled' : ''}} type="button" class="btn btn-danger btn-block">Activar Maquina</button>
                 <a class="btn btn-info btn-block loginbtn" role="button" href={{route("requestLicenseForm")}}>Pedir "Chave de Activação</a>
                 <br>
 

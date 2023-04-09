@@ -82,32 +82,50 @@
 
                     <div class="panel-body">
 
-                      @if(session("errorLogin"))
-                          <div class="alert alert-danger">
-                            {{session("errorLogin")}}
-                          </div>
-                      @endif
-
-                        <form action={{route('checkLogin')}} method="POST" id="loginForm">
+                        @if(session("errorCadastroNewUsuario"))
+                            <div class="alert alert-danger">
+                                {{session("errorCadastroNewUsuario")}}
+                            </div>
+                        @endif
+                    
+                        <form action={{route('creatUser')}} method="POST" id="loginForm">
                           @csrf
                           
                             <div class="form-group">
-                                <label class="control-label" for="username">Email</label>
-                                <input type="text" placeholder="example@gmail.com" required="" title="por favor entra com o seu email" name="email" id="username" class="form-control">
-                                <span class="help-block small">Seu email exclusivo para o aplicativo</span>
+                                <label class="control-label" for="username">Nome do Usuario</label>
+                                <input type="text" placeholder="Mateus João" value="{{old("name")}}" title="Por favor entra com o seu nome do Usuario" name="name" id="username" class="form-control">
+                                <span class="help-block small">Seu nome do usuario sera exclusivo para o aplicativo</span>
+                                @error('name')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
+                           
+                            <div class="form-group">
+                                <label class="control-label" for="email">Email</label>
+                                <input type="email" placeholder="example@gmail.com" value="{{old("email")}}" title="por favor entra com o seu email" name="email" id="email" class="form-control">
+                                <span class="help-block small">Seu email exclusivo para o aplicativo</span>
+                                @error('email')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label" for="password">Senha</label>
-                                <input type="password" title="Please enter your password" placeholder="*************" required="" name="password" id="password" class="form-control">
-                                <span class="help-block small">seu codigo secreto</span>
+                                <input type="password" placeholder="************" value="{{old("password")}}" name="password" id="password" class="form-control">
+                                @error('password')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
                             </div>
-                            <div class="checkbox login-checkbox">
-                                <label>
-										          <input type="checkbox"  class="i-checks"> Lembrar-me </label>
-                                <p class="help-block small">recomendamos esta opção para dispositivos pessoais</p>
-                            </div>
-                            <button type="submit" class="btn btn-success btn-block loginbtn">Entrar</button>
 
+                            <div class="form-group">
+                                <label class="control-label" for="password-1">Confirmação da Senha</label>
+                                <input type="password" placeholder="************" value="{{old("password_confirmation")}}" name="password_confirmation" id="password-1" class="form-control">
+                                @error('password_confirmation')
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-block loginbtn">Cadastrar-se</button>
                         </form>
                     </div>
                 </div>

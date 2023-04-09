@@ -97,28 +97,42 @@
                     <br><br>
 
                         <li>
-                            <a href={{route("showLicense")}} aria-expanded="false"> 
+                            <a aria-invalid="" href={{route("showLicense")}} aria-expanded="false"> 
                                 <span class="mini-click-non"> + Licenças</span>
                             </a>
                         </li>
                         
                         <li>
                             <a href={{route("showParceiros")}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Parceiros</span>
-                                
+                                <span class="mini-click-non"> + Parceiros</span> 
                             </a>
+                        </li>
+                        
+                        <li>
+                            @if(session("cargo"))
+                                <a href={{route("showUsuarios")}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Usuarios</span>
+                                </a>
+                            @endif
+                            
                         </li>
 
                         <li>
-                            <a href={{route("cadastrarParceiro")}} aria-expanded="false"> 
-                                <span class="mini-click-non"> + Cadastrar Parceiros</span>
-                            </a>
+                            @if(session("cargo"))
+                                <a href={{route("cadastrarParceiro")}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Cadastrar Parceiros</span>
+                                </a>
+                            @endif
+                            
                         </li>
 
                         <li>
-                            <a href="#" aria-expanded="false"> 
-                                <span class="mini-click-non"> + Cadastrar Usuario</span>
-                            </a>
+                            @if(session("cargo"))
+                                <a href={{route('cadastrarUsuario')}} aria-expanded="false"> 
+                                    <span class="mini-click-non"> + Cadastrar Usuario</span>
+                                </a>
+                            @endif
+                           
                         </li>
                         
                     </ul>
@@ -164,7 +178,7 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 															
-															<span class="admin-name">Admin</span>
+															<span class="admin-name">{{ session("username") }}</span>
 															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
@@ -172,10 +186,17 @@
                                                         <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic">
                                                             </span>Meu perfil</a>
                                                         </li>
-                                    
-                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic">
-                                                            </span>Sair</a>
-                                                        </li>
+                                                        
+                                                        <form action={{route('logout')}} method="POST" id="logout">
+                                                        @csrf
+                                                            <li>
+                                                                <a onclick="document.getElementById('logout').submit();">
+                                                                    <span class="edu-icon edu-locked author-log-ic"></span>
+                                                                    Sair
+                                                                </a>
+                                                            </li>  
+                                                        </form>
+                                                        
                                                     </ul>
                                                 </li>
                                          
