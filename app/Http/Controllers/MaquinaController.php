@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maquina;
+use Illuminate\Support\Facades\Request;
 use Jenssegers\Agent\Agent;
 use Symfony\Component\Process\Process;
 

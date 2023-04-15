@@ -51,7 +51,7 @@
                                                                     <option value="Administrador">Administrador</option>
                                                                     <option value="Usuario-1">Usuario-1</option>
                                                                     <option value="Usuario-2">Usuario-2</option>
-                                                                  </select>
+                                                                </select>
                                                                   @error('cargo')
                                                                     <div class="alert alert-danger">{{$message}}</div>
                                                                   @enderror
