@@ -97,6 +97,7 @@ class AuthController extends Controller
             }
             session(["username"=>$user->name]);        
             return view("admin/licencas"); 
+            
         }else{
             return redirect()->back()->with(
                 'errorLogin', 
